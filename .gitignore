@@ -1,3 +1,6 @@
 *.db
 .idea
 node_modules
+.yarn
+.yarnrc.yml
+.env

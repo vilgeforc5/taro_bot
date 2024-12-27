@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import {PrismaClient} from "@prisma/client";
 
 const siteUrl = "https://magya-online.ru/"
 const baseUrl = siteUrl + "znachenie_kart_taro_karta_dnya/"
@@ -51,7 +52,10 @@ async function getCardCategories() {
     return map
 }
 
-export async function initFillDb(prisma) {
+export async function initFillDb() {
+    const prisma = new PrismaClient()
+    await prisma.$connect();
+
     const categories = await getCardCategories();
 
     for (const [category, cardNames] of Object.entries(categories)) {
@@ -61,10 +65,22 @@ export async function initFillDb(prisma) {
 
         for (const name of cardNames) {
             const data = await getCardInfo(name);
-
             cardsData.push({...data, categoryId})
         }
 
         await prisma.card.createMany({data: cardsData})
     }
+
+    await prisma.$disconnect()
+}
+
+
+try {
+    await initFillDb();
+
+    process.exit(0);
+} catch (error) {
+    console.error(error);
+
+    process.exit(1)
 }

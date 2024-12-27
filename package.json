@@ -8,7 +8,8 @@
     "@types/node": "^22.10.2"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "fill-database": "node src/fillDb.js"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
