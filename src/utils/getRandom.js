@@ -1,0 +1,1 @@
+export const getRandom = (min, max) => Math.trunc(Math.random() * (max - min)) + min;

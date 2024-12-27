@@ -29,6 +29,6 @@ model Category {
 }
 
 model User {
-  id   Int    @id @default(autoincrement())
-  tgId String @unique
+  id     Int    @id @default(autoincrement())
+  chatId String @unique
 }

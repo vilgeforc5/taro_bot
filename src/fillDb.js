@@ -17,7 +17,7 @@ async function getCardInfo(url) {
 
     return ({
         description: $('.text p').first().text().trim(),
-        title: $('.text h2').first().text().trim(),
+        title: $('.text h2').first().text().split('-')[0].trim(),
         imgUrl: siteUrl + $('.text img').first().attr().src
     });
 }
